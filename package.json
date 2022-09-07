@@ -1,0 +1,43 @@
+{
+  "name": "figma-discord-upload-webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "watch": "parcel watch --no-hmr",
+    "build": "npm run clean && parcel build"
+  },
+  "targets": {
+    "code": {
+      "source": [
+        "src/index.ts"
+      ],
+      "distDir": "dist"
+    },
+    "ui": {
+      "source": [
+        "src/ui.html"
+      ],
+      "distDir": "dist"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanberger/figma-discord-upload-webhook.git"
+  },
+  "author": "Bryan Berger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryanberger/figma-discord-upload-webhook/issues"
+  },
+  "homepage": "https://github.com/bryanberger/figma-discord-upload-webhook#readme",
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "@types/node": "^18.7.1",
+    "parcel": "^2.5.0",
+    "rimraf": "^3.0.2"
+  }
+}

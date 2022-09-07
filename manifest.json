@@ -1,0 +1,36 @@
+{
+  "name": "Upload to Discord",
+  "id": "1136745882239085583",
+  "api": "1.0.0",
+  "main": "dist/index.js",
+  "ui": "dist/ui.html",
+  "enablePrivatePluginApi": true,
+  "parameterOnly": true,
+  "permissions": [
+    "currentuser"
+  ],
+  "relaunchButtons": [
+    {
+      "command": "upload",
+      "name": "Upload to Discord"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "Description",
+      "key": "description",
+      "allowFreeform": true,
+      "optional": true
+    },
+    {
+      "name": "Thread Name",
+      "key": "thread-name",
+      "allowFreeform": true,
+      "optional": true
+    }
+  ],
+  "editorType": [
+    "figma",
+    "figjam"
+  ]
+}
