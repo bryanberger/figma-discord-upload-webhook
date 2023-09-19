@@ -1,16 +1,16 @@
 export type WebhookMessage = {
   type: "sendWebhook";
   webhookUrl: string;
-  imgBlob: Uint8Array;
-  threadName?: string;
-  description?: string;
-  discordUserId?: string;
+  content: string;
+  threadName: string;
+  attachmentsData: Attachment[];
   figmaData: {
     username: string;
     avatarUrl: string;
-    nodeName: string;
-    nodeUrl: string;
-    nodeNameSlug: string;
+    fileUrl: string;
+  };
+  discordData?: {
+    username: string;
   };
 };
 
@@ -20,6 +20,14 @@ export type PluginMessage = {
 };
 
 export type CustomParameters = {
+  threadName: string;
   description?: string;
-  threadName?: string;
+  shareLinks?: string; // all params are strings, but this is really meant to be treated as a boolean
+};
+
+export type Attachment = {
+  blob: Uint8Array;
+  name: string;
+  url: string;
+  slug: string;
 };

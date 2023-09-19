@@ -2,48 +2,49 @@ import { WebhookMessage, PluginMessage } from "./types";
 
 window.onmessage = async (event: MessageEvent<any>) => {
   if (event.data.pluginMessage.type === "sendWebhook") {
-    const { figmaData, imgBlob, webhookUrl, threadName, description } = event
-      .data.pluginMessage as WebhookMessage;
+    console.log(event.data.pluginMessage);
 
-    const filename = `${figmaData.nodeNameSlug}.png`;
-
-    const imgFile = new File([imgBlob], filename, {
-      type: "image/png",
-      lastModified: Date.now(),
-    });
+    const { discordData, attachmentsData, webhookUrl, threadName, content } =
+      event.data.pluginMessage as WebhookMessage;
 
     const formData = new FormData();
-    formData.append(filename, imgFile);
+
+    // Attach each image as a separate file with a unique name
+    const attachments = attachmentsData.map((data, index) => {
+      const { blob, slug, url } = data;
+      const filename = `${slug}_${index}.png`;
+      const file = new File([blob], filename, {
+        type: "image/png",
+        lastModified: Date.now(),
+      });
+
+      formData.append(`files[${index}]`, file, filename);
+
+      return {
+        id: index,
+        description: `Image ${index + 1} of ${attachmentsData.length}`,
+        filename: filename,
+      };
+    });
+
+    // Attach the JSON payload
     formData.append(
       "payload_json",
       JSON.stringify({
         thread_name: threadName,
-        embeds: [
-          {
-            title: figmaData.nodeName,
-            description,
-            author: {
-              name: figmaData.username,
-              icon_url: figmaData.avatarUrl,
-            },
-            url: figmaData.nodeUrl,
-            image: {
-              url: `attachment://${filename}`,
-            },
-            footer: {
-              text: "Posted from Figma",
-            },
-            timestamp: new Date(),
-          },
-        ],
+        username: discordData?.username || null,
+        content,
+        attachments,
       })
     );
 
+    console.log(formData);
+
+    // Fetch
     const response = await fetch(webhookUrl, {
       method: "POST",
       body: formData,
     });
-
     const code = response.status;
     const status = code >= 200 && code < 300 ? "success" : "error";
 

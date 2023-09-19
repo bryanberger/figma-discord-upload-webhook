@@ -1,5 +1,5 @@
 {
-  "name": "Upload to Discord",
+  "name": "WIP",
   "id": "1136745882239085583",
   "api": "1.0.0",
   "main": "dist/index.js",
@@ -9,13 +9,13 @@
   "permissions": [
     "currentuser"
   ],
-  "relaunchButtons": [
-    {
-      "command": "upload",
-      "name": "Upload to Discord"
-    }
-  ],
   "parameters": [
+    {
+      "name": "Thread Name",
+      "key": "threadName",
+      "allowFreeform": true,
+      "optional": false
+    },
     {
       "name": "Description",
       "key": "description",
@@ -23,9 +23,8 @@
       "optional": true
     },
     {
-      "name": "Thread Name",
-      "key": "thread-name",
-      "allowFreeform": true,
+      "name": "Share Links?",
+      "key": "shareLinks",
       "optional": true
     }
   ],
