@@ -11,7 +11,7 @@
   ],
   "parameters": [
     {
-      "name": "Thread Name",
+      "name": "Thread name",
       "key": "threadName",
       "allowFreeform": true,
       "optional": false
@@ -23,7 +23,7 @@
       "optional": true
     },
     {
-      "name": "Share Links?",
+      "name": "Share links to Figma?",
       "key": "shareLinks",
       "optional": true
     }
